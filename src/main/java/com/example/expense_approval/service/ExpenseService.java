@@ -20,4 +20,5 @@ public interface ExpenseService {
 
     List<ExpenseAuditDto> getAuditHistory(Long expenseId);
 
+    List<ExpenseDto> getAllExpenses();
 }

@@ -23,6 +23,15 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseAuditRepository auditRepository;
     private final ExpenseMapper expenseMapper;
 
+    @Override
+    public List<ExpenseDto> getAllExpenses() {
+        return expenseRepository
+                .findAllByOrderByCreatedOnDesc()
+                .stream()
+                .map(expenseMapper::toDto)
+                .toList();
+    }
+
     // ---------------- CREATE DRAFT ----------------
     @Override
     public ExpenseDto createDraft(ExpenseDto dto) {

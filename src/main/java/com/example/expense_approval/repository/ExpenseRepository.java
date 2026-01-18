@@ -9,4 +9,5 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<ExpenseDao, Long> {
 
 //    List<ExpenseDao> findByExpenseIdOrderByActionAtAsc(Long expenseId);
+    List<ExpenseDao> findAllByOrderByCreatedOnDesc();
 }

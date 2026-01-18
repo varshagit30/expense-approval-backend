@@ -18,6 +18,12 @@ public class ExpenseController {
 
     private final ExpenseService expenseService;
 
+    // LIST OF EXPENSES //
+    @GetMapping
+    public ResponseEntity<List<ExpenseDto>> getAllExpenses() {
+        return ResponseEntity.ok(expenseService.getAllExpenses());
+    }
+
     // ---------- CREATE DRAFT ----------
     @PostMapping
     public ResponseEntity<ExpenseDto> createDraft(@RequestBody ExpenseDto expenseDto) {
