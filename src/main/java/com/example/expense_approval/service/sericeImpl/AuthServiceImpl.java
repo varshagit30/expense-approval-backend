@@ -1,5 +1,6 @@
 package com.example.expense_approval.service.sericeImpl;
 
+import com.example.expense_approval.dto.LoginResponse;
 import com.example.expense_approval.entity.UserDao;
 import com.example.expense_approval.repository.UserRepository;
 import com.example.expense_approval.security.JwtService;
@@ -17,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public String login(String username, String password) {
+    public LoginResponse login(String username, String password) {
 
         UserDao user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Invalid username or password"));
@@ -27,6 +28,12 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException("Invalid username or password");
         }
 
-        return jwtService.generateToken(user.getUsername(), user.getRole().name());
+        String token = jwtService.generateToken(user.getUsername(), user.getRole().name());
+
+        LoginResponse res = new LoginResponse();
+        res.setToken(token);
+        res.setUserId(user.getId());
+
+        return res;
     }
 }

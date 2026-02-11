@@ -1,5 +1,7 @@
 package com.example.expense_approval.service;
 
+import com.example.expense_approval.dto.LoginResponse;
+
 public interface AuthService {
-    String login(String username, String password);
+    LoginResponse login(String username, String password);
 }

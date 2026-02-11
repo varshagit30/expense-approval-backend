@@ -19,25 +19,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
-        LoginResponse res = new LoginResponse();
+        LoginResponse response =
+                authService.login(request.getUsername(), request.getPassword());
 
-        try {
-            String token = authService.login(
-                    request.getUsername(),
-                    request.getPassword()
-            );
-
-            res.setToken(token);
-            res.setMessage("Login successful");
-            return ResponseEntity.ok(res);
-
-        } catch (RuntimeException ex) {
-            res.setToken(null);
-            res.setMessage(ex.getMessage());
-
-            return ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED)
-                    .body(res);
-        }
+        return ResponseEntity.ok(response);
     }
 }
